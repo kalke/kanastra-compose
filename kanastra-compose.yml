@@ -1,0 +1,29 @@
+services:
+  mysql-local:
+    image: mysql:5.7
+    container_name: mysql-local
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: kanastra
+    ports:
+      - "3306:3306"
+    networks:
+      - db_sharing
+    command: --sql_mode=""
+    restart: unless-stopped
+
+  kanastra-debt-api:
+    build: $HOME/Projects/kanastra-debt-api
+    container_name: kanastra-debt-api
+    environment:
+      - DATABASE_URL=mysql+pymysql://root:root@mysql-local/kanastra
+    depends_on:
+      - mysql-local
+    ports:
+      - "8000:8000"
+    networks:
+      - db_sharing
+    restart: unless-stopped
+
+networks:
+  db_sharing:
