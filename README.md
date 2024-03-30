@@ -61,6 +61,14 @@ docker ps
 
 Once the services are up, you should be able to access:
 
-The API: <http://localhost:8000/>
+The API documentation can be accessed with:
 
-The Front-end Page: <http://localhost:8888/>
+```bash
+xdg-open http://localhost:8000/docs > /dev/null
+```
+
+The Front-end Page can be accessed with
+
+```bash
+xdg-open http://localhost:8888 > /dev/null
+```
