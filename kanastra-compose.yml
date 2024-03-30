@@ -5,6 +5,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: kanastra
+      TZ: UTC
     ports:
       - "3306:3306"
     networks:
@@ -15,12 +16,21 @@ services:
   kanastra-debt-api:
     build: $HOME/Projects/kanastra-debt-api
     container_name: kanastra-debt-api
-    environment:
-      - DATABASE_URL=mysql+pymysql://root:root@mysql-local/kanastra
     depends_on:
       - mysql-local
+    environment:
+      - DATABASE_URL=mysql+pymysql://root:root@mysql-local:3306/kanastra?charset=utf8mb4&binary_prefix=true
     ports:
       - "8000:8000"
+    networks:
+      - db_sharing
+    restart: unless-stopped
+
+  kanastra-debt-page:
+    build: $HOME/Projects/kanastra-debt-page
+    container_name: kanastra-debt-page
+    ports:
+      - "8888:8888"
     networks:
       - db_sharing
     restart: unless-stopped
