@@ -19,7 +19,8 @@ services:
     depends_on:
       - mysql-local
     environment:
-      - DATABASE_URL=mysql+pymysql://root:root@mysql-local:3306/kanastra?charset=utf8mb4&binary_prefix=true
+      - DATABASE_URL=mysql+aiomysql://root:root@mysql-local:3306/kanastra
+      - ALEMBIC_DATABASE_URL=mysql+pymysql://root:root@mysql-local:3306/kanastra
     ports:
       - "8000:8000"
     networks:

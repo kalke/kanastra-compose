@@ -61,6 +61,6 @@ docker ps
 
 Once the services are up, you should be able to access:
 
-The API: <http://localhost:8000/docs#/>
+The API: <http://localhost:8000/>
 
 The Front-end Page: <http://localhost:8888/>
